@@ -1,0 +1,9 @@
+node_modules
+.env
+.DS_Store
+coverage/
+.vscode/
+dist/
+
+# TanStack Router auto-generated file
+src/routeTree.gen.ts
