@@ -92,122 +92,6 @@ nav > a {
   src: url("/public/Pacifico-Regular.ttf");
 }
 
-h2 {
-  font-family: var(--font);
-  font-size: 40px;
-  line-height: auto;
-  font-weight: 400;
-  color: var(--primary);
-  text-align: center;
-}
-
-h2::after {
-  content: "";
-  display: inline-block;
-  margin-left: 25px;
-  width: 150px;
-  height: 30px;
-  background: conic-gradient(
-    transparent 90deg,
-    var(--primary) 90deg 180deg,
-    transparent 180deg 270deg,
-    var(--primary) 270deg
-  );
-  background-repeat: repeat;
-  background-size: 30px 30px;
-  background-position: top left;
-}
-
-.order {
-  width: 100%;
-  margin-left: 5%;
-}
-
-form div {
-  margin: 10px 0;
-  text-align: center;
-}
-
-form > div {
-  padding: 15px;
-  width: 100%;
-}
-
-form > div:first-child {
-  border-right: 1px solid #ccc;
-}
-
-form > div > div > label {
-  display: block;
-  font-size: 20px;
-  color: var(--secondary);
-  margin-bottom: 10px;
-}
-
-form select {
-  display: block;
-  font-size: 16px;
-  padding: 5px;
-  margin-bottom: 30px;
-  width: 100%;
-}
-
-form input[type="radio"] {
-  display: none;
-}
-
-form input + label {
-  height: 80px;
-  width: 80px;
-  border: 1px solid #999;
-  background-color: #ccc;
-  color: #999;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 15px 10px 15px;
-}
-
-form input:checked + label {
-  color: #333;
-  background-color: #fff;
-}
-
-form > div > div > label {
-  display: block;
-  font-size: 20px;
-  color: var(--secondary);
-  margin-bottom: 10px;
-}
-
-.pizza {
-  line-height: 1.5;
-}
-
-.pizza img {
-  max-width: 200px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-}
-
-.pizza h1 {
-  font-weight: normal;
-  color: var(--secondary);
-  font-size: 25px;
-}
-
-.pizza p {
-  margin-bottom: 5px;
-}
-
-.order form {
-  display: flex;
-
-  justify-content: space-between;
-}
-
 button,
 .index li a {
   border: 1px solid var(--primary);
@@ -224,18 +108,6 @@ button,
 button:disabled {
   opacity: 0.5;
   background-color: #ccc;
-}
-
-.order-pizza {
-  width: 100%;
-  margin-left: 25px;
-}
-
-.pizza {
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .pizza-of-the-day {
@@ -264,25 +136,6 @@ button:disabled {
   margin-right: 30px;
   line-height: 2;
   text-align: center;
-}
-
-.order-page {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 50px;
-}
-
-.cart {
-  border-left: 1px solid var(--border);
-  line-height: 1.5;
-  text-align: center;
-  padding: 15px;
-}
-
-.cart p {
-  margin: 15px 0;
 }
 
 .index h1 {
@@ -384,29 +237,6 @@ tbody tr:last-of-type {
   font-size: 20px;
 }
 
-#modal {
-  background-color: rgba(0, 0, 0, 0.9);
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#modal:empty {
-  display: none;
-}
-
-#modal > div {
-  padding: 15px;
-  text-align: center;
-  border-radius: 30px;
-  background: var(--background);
-}
 td img {
   width: 50px;
 }

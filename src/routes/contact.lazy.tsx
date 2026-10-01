@@ -26,7 +26,8 @@ function ContactRoute() {
   });
 
   return (
-    <div className="contact">
+
+    <div className="contact my-3.75 w-full max-w-125 static absolute bottom left-0 rounded-[5px]">
       <h2>Contact</h2>
       {mutation.isSuccess ? (
         <h3>Submitted!</h3>
@@ -35,7 +36,9 @@ function ContactRoute() {
           <input name="name" placeholder="Name" />
           <input type="email" name="email" placeholder="Email" />
           <textarea placeholder="Message" name="message"></textarea>
-          <button>Submit</button>
+          <button className="btn">
+            Submit
+          </button>
         </form>
       )}
     </div>
