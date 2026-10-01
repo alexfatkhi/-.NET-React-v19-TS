@@ -1,0 +1,38 @@
+/* Deklarasi urutan cascade layer (kalah → menang):
+   theme < base < legacy < components < utilities < (CSS tanpa layer).
+   Baris ini HARUS paling atas — deklarasi pertama yang menentukan urutan. */
+@layer theme, base, legacy, components, utilities;
+
+/* Design token — menggantikan :root var lama dari CSS tradisional.
+   Harus dideklarasikan SEBELUM import utilities agar Tailwind mendaftarkan
+   token-nya dan membuat utility yang memakainya
+   (mis. text-secondary, border-border, font-pacifico).
+   Prefix menentukan utility yang dibuat:
+   --color-XXX menghasilkan text-XXX, bg-XXX, border-XXX (mis. bg-primary).
+   --font-XXX menghasilkan font-XXX. */
+@theme {
+  --color-primary: #da2f04;
+  --color-secondary: #33670a;
+  --color-background: #fffaee;
+  --color-border: #ccc;
+  --font-pacifico: Pacifico, cursive, sans-serif;
+}
+
+/* Token tema Tailwind (warna, spacing, font) bawaan. */
+@import "tailwindcss/theme.css" layer(theme);
+
+/* CSS lama, masuk ke layer `legacy` (di bawah utilities) supaya utility
+   Tailwind selalu menang, tapi CSS lama tetap menang atas reset bawaan.
+   Preflight sengaja TIDAK di-import selama migrasi: legacy.css sudah punya
+   reset sendiri (* { margin:0; padding:0 }, ul { list-style:none }, dst). */
+@import "./legacy.css" layer(legacy);
+
+/* Semua utility class. */
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Plugin form resmi, strategy "class": hanya element yang kita beri
+   form-input/form-select/form-textarea/dst yang di-reset, bukan semua
+   form control di aplikasi (lebih aman untuk migrasi bertahap). */
+@plugin "@tailwindcss/forms" {
+  strategy: "class";
+}
