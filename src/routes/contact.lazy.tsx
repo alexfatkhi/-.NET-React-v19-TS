@@ -12,6 +12,9 @@ function getString(formData: FormData, key: string): string {
   return typeof value === "string" ? value : "";
 }
 
+const fieldClass =
+  "my-3.75 w-full max-w-125 rounded-[5px] border-2 border-border p-2 focus:border-primary disabled:bg-[#999]";
+
 function ContactRoute() {
   const mutation = useMutation({
     mutationFn: function (e: SubmitEvent<HTMLFormElement>) {
@@ -20,25 +23,33 @@ function ContactRoute() {
       return postContact(
         getString(formData, "name"),
         getString(formData, "email"),
-        getString(formData, "message")
+        getString(formData, "message"),
       );
     },
   });
 
   return (
-
-    <div className="contact my-3.75 w-full max-w-125 static absolute bottom left-0 rounded-[5px]">
+    <div>
       <h2>Contact</h2>
       {mutation.isSuccess ? (
-        <h3>Submitted!</h3>
+        <h3 className="m-12.5 text-center font-pacifico text-[30px] font-normal text-secondary">
+          Submitted!
+        </h3>
       ) : (
-        <form onSubmit={mutation.mutate}>
-          <input name="name" placeholder="Name" />
-          <input type="email" name="email" placeholder="Email" />
-          <textarea placeholder="Message" name="message"></textarea>
-          <button className="btn">
-            Submit
-          </button>
+        <form className="flex flex-col items-center" onSubmit={mutation.mutate}>
+          <input className={fieldClass} name="name" placeholder="Name" />
+          <input
+            className={fieldClass}
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <textarea
+            className={`${fieldClass} min-h-50`}
+            placeholder="Message"
+            name="message"
+          ></textarea>
+          <button className="btn">Submit</button>
         </form>
       )}
     </div>

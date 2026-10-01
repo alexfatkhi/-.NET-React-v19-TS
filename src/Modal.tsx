@@ -22,14 +22,11 @@ const Modal = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return createPortal(
-    <div className="rounded-[30px] bg-background p-3.75 text-center">
+    <div className="max-w-[calc(100vw-2rem)] rounded-[30px] bg-background p-3.75 text-center">
       {children}
-
     </div>,
-    elRef.current
-  )
-
-
+    elRef.current,
+  );
 };
 
 export default Modal;
