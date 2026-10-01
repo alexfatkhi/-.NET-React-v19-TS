@@ -7,6 +7,11 @@ export const Route = createLazyFileRoute("/contact")({
   component: ContactRoute,
 });
 
+// w-full max-w-125: selebar ruang yang ada, maksimal 500px (dulu width: 500px
+// tetap, yang membuat /contact overflow di HP).
+const fieldClass =
+  "my-3.75 w-full max-w-125 rounded-[5px] border-2 border-border p-2 focus:border-primary";
+
 function getString(formData: FormData, key: string): string {
   const value = formData.get(key);
   return typeof value === "string" ? value : "";
@@ -32,9 +37,22 @@ function ContactRoute() {
         <h3>Submitted!</h3>
       ) : (
         <form onSubmit={mutation.mutate}>
-          <input name="name" placeholder="Name" />
-          <input type="email" name="email" placeholder="Email" />
-          <textarea placeholder="Message" name="message"></textarea>
+          <input
+            className={`${fieldClass} disabled:bg-[#999]`}
+            name="name"
+            placeholder="Name"
+          />
+          <input
+            className={`${fieldClass} disabled:bg-[#999]`}
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <textarea
+            className={`${fieldClass} min-h-50`}
+            placeholder="Message"
+            name="message"
+          ></textarea>
           <button className="btn">Submit</button>
         </form>
       )}
