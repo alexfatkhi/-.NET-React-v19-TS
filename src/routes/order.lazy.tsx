@@ -13,10 +13,6 @@ const intl = new Intl.NumberFormat("en-US", {
 const sizeLabelClass =
   "mx-3.75 mb-2.5 inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-[5px] border border-[#999] bg-border text-[#999] peer-checked:bg-white peer-checked:text-[#333] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary";
 
-// Tombol submit: string class yang persis sama dengan tombol Checkout di Cart.
-const buttonClass =
-  "inline-block cursor-pointer rounded-[5px] border border-primary bg-transparent px-3.75 py-1.25 font-pacifico text-[20px] text-primary hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-border disabled:opacity-50";
-
 export const Route = createLazyFileRoute("/order")({
   component: Order,
 });
@@ -152,7 +148,7 @@ function Order() {
               </span>
             </div>
           </div>
-          <button type="submit" className={buttonClass}>
+          <button type="submit" className="btn">
             Add to Cart
           </button>
         </div>
