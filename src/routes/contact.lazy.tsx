@@ -26,19 +26,34 @@ function ContactRoute() {
   });
 
   return (
-
-    <div className="contact my-3.75 w-full max-w-125 static absolute bottom left-0 rounded-[5px]">
+    <div>
       <h2>Contact</h2>
       {mutation.isSuccess ? (
-        <h3>Submitted!</h3>
+        <h3 className="m-12.5 text-center font-pacifico text-[30px] font-normal text-secondary">
+          Submitted!
+        </h3>
       ) : (
-        <form onSubmit={mutation.mutate}>
-          <input name="name" placeholder="Name" />
-          <input type="email" name="email" placeholder="Email" />
-          <textarea placeholder="Message" name="message"></textarea>
-          <button className="btn">
-            Submit
-          </button>
+        <form
+          onSubmit={mutation.mutate}
+          className="flex flex-col items-center"
+        >
+          <input
+            name="name"
+            placeholder="Name"
+            className="my-3.75 w-full max-w-125 rounded-[5px] border-2 border-border bg-white p-2 focus:border-primary disabled:bg-[#999]"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="my-3.75 w-full max-w-125 rounded-[5px] border-2 border-border bg-white p-2 focus:border-primary disabled:bg-[#999]"
+          />
+          <textarea
+            placeholder="Message"
+            name="message"
+            className="my-3.75 min-h-50 w-full max-w-125 rounded-[5px] border-2 border-border bg-white p-2 focus:border-primary"
+          ></textarea>
+          <button className="btn">Submit</button>
         </form>
       )}
     </div>

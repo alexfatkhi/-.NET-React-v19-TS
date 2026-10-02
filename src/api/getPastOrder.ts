@@ -7,3 +7,4 @@ export default async function getPastOrder(
   const data = (await response.json()) as PastOrderDetail;
   return data;
 }
+
