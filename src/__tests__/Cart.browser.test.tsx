@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { expect, test } from "vitest";
 import Cart from "../Cart";
-import type { CartItem } from "../contexts";
+import type { CartItem } from "../cartSlice";
 
 // render dengan data dummy, cek jumlah item, total, dan tombol.
 test("renders cart items and correct total", () => {

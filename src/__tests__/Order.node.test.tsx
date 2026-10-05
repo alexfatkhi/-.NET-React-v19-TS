@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import { expect, test, vi } from "vitest";
 import createFetchMock from "vitest-fetch-mock";
-import { CartContext } from "../contexts";
-import type { CartItem } from "../contexts";
+import { Provider } from "react-redux";
+import { makeStore } from "../store";
 import { Route } from "../routes/order.lazy";
 
 // fetch dipalsukan (mock) supaya tidak menembak server beneran.
@@ -24,17 +24,15 @@ test(
     ];
     fetchMocker.mockResponse(JSON.stringify(pizzas)); // jawaban palsu dari server
 
-    const cartHook: [CartItem[], (cart: CartItem[]) => void] = [[], vi.fn()]; // [keranjang kosong, setCart palsu]
-
     const OrderRoute = Route.options.component;
     if (!OrderRoute) {
       throw new Error("order route has no component");
     }
 
     const screen = render(
-      <CartContext.Provider value={cartHook}>
+      <Provider store={makeStore()}>
         <OrderRoute />
-      </CartContext.Provider>
+      </Provider>
     );
 
     expect(screen.getByText("LOADING …")).toBeDefined(); // awalnya loading
