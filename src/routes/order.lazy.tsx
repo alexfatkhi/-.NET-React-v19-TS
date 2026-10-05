@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { addToCart, clearCart, selectCartItems } from "../cartSlice";
+import {
+  setPizzaType,
+  setPizzaSize,
+  selectPizzaType,
+  selectPizzaSize,
+} from "../orderSlice";
 import Cart from "../Cart";
 import Pizza from "../Pizza";
 import type { Pizza as PizzaType, PizzaSize } from "../APIResponsesTypes";
@@ -20,11 +26,11 @@ export const Route = createLazyFileRoute("/order")({
 
 // ini komponen Ordernya nanti dipanggil
 function Order() {
-  const [pizzaType, setPizzaType] = useState("pepperoni");
-  const [pizzaSize, setPizzaSize] = useState<PizzaSize>("M");
   const [pizzaTypes, setPizzaTypes] = useState<PizzaType[]>([]);
   const [loading, setLoading] = useState(true);
   const cart = useAppSelector(selectCartItems);
+  const pizzaType = useAppSelector(selectPizzaType);
+  const pizzaSize = useAppSelector(selectPizzaSize);
   const dispatch = useAppDispatch();
 
   let price: string | undefined;
@@ -88,7 +94,7 @@ function Order() {
               </label>
               <select
                 className="form-select mb-7.5 block w-full py-1.25 pl-1.25 text-[16px]"
-                onChange={(e) => setPizzaType(e.target.value)}
+                onChange={(e) => dispatch(setPizzaType(e.target.value))}
                 name="pizza-type"
                 value={pizzaType}
               >
@@ -109,7 +115,9 @@ function Order() {
               <div className="my-2.5 text-center">
                 <span>
                   <input
-                    onChange={(e) => setPizzaSize(e.target.value as PizzaSize)}
+                    onChange={(e) =>
+                      dispatch(setPizzaSize(e.target.value as PizzaSize))
+                    }
                     checked={pizzaSize === "S"}
                     className="peer sr-only"
                     type="radio"
@@ -123,7 +131,9 @@ function Order() {
                 </span>
                 <span>
                   <input
-                    onChange={(e) => setPizzaSize(e.target.value as PizzaSize)}
+                    onChange={(e) =>
+                      dispatch(setPizzaSize(e.target.value as PizzaSize))
+                    }
                     checked={pizzaSize === "M"}
                     className="peer sr-only"
                     type="radio"
@@ -137,7 +147,9 @@ function Order() {
                 </span>
                 <span>
                   <input
-                    onChange={(e) => setPizzaSize(e.target.value as PizzaSize)}
+                    onChange={(e) =>
+                      dispatch(setPizzaSize(e.target.value as PizzaSize))
+                    }
                     checked={pizzaSize === "L"}
                     className="peer sr-only"
                     type="radio"
