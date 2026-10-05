@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { useGetPizzasQuery } from "../api/pizzaApi";
+import { useGetPizzasQuery, usePlaceOrderMutation } from "../api/pizzaApi";
 import { addToCart, clearCart, selectCartItems } from "../cartSlice";
 import {
   setPizzaType,
@@ -29,8 +28,8 @@ export const Route = createLazyFileRoute("/order")({
 function Order() {
   const { data: pizzaTypes = [], isLoading: isLoadingPizzas } =
     useGetPizzasQuery();
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const loading = isLoadingPizzas || isCheckingOut;
+  const [placeOrder, { isLoading: isPlacingOrder }] = usePlaceOrderMutation();
+  const loading = isLoadingPizzas || isPlacingOrder;
   const cart = useAppSelector(selectCartItems);
   const pizzaType = useAppSelector(selectPizzaType);
   const pizzaSize = useAppSelector(selectPizzaSize);
@@ -46,20 +45,8 @@ function Order() {
   }
 
   async function checkout() {
-    setIsCheckingOut(true);
-
-    await fetch("/api/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        cart,
-      }),
-    });
-
+    await placeOrder(cart);
     dispatch(clearCart());
-    setIsCheckingOut(false);
   }
 
   return (
