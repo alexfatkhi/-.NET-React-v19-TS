@@ -1,7 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { useMutation } from "@tanstack/react-query";
-import type { SubmitEvent } from "react";
-import postContact from "../api/postContact";
+import type { FormEvent } from "react";
+import { usePostContactMutation } from "../api/pizzaApi";
 
 export const Route = createLazyFileRoute("/contact")({
   component: ContactRoute,
@@ -13,30 +12,27 @@ function getString(formData: FormData, key: string): string {
 }
 
 function ContactRoute() {
-  const mutation = useMutation({
-    mutationFn: function (e: SubmitEvent<HTMLFormElement>) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      return postContact(
-        getString(formData, "name"),
-        getString(formData, "email"),
-        getString(formData, "message")
-      );
-    },
-  });
+  const [postContact, { isSuccess }] = usePostContactMutation();
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    void postContact({
+      name: getString(formData, "name"),
+      email: getString(formData, "email"),
+      message: getString(formData, "message"),
+    });
+  }
 
   return (
     <div>
       <h2>Contact</h2>
-      {mutation.isSuccess ? (
+      {isSuccess ? (
         <h3 className="m-12.5 text-center font-pacifico text-[30px] font-normal text-secondary">
           Submitted!
         </h3>
       ) : (
-        <form
-          onSubmit={mutation.mutate}
-          className="flex flex-col items-center"
-        >
+        <form onSubmit={handleSubmit} className="flex flex-col items-center">
           <input
             name="name"
             placeholder="Name"

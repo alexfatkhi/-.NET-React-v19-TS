@@ -38,7 +38,7 @@ function PastOrdersRoute() {
     focusedOrder ?? skipToken,
   );
 
-  if (isFetching) {
+  if (isFetching && !data) {
     return (
       <div className="mx-auto min-h-162.5 w-[90%] max-w-225">
         <h2>LOADING …</h2>
